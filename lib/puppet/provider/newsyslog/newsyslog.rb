@@ -65,4 +65,3 @@ Puppet::Type.type(:newsyslog).provide(
 
 		}
 end
-
