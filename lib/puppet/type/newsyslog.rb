@@ -38,10 +38,14 @@ Puppet::Type.newtype(:newsyslog) do
 	end
 
 	newproperty(:pidfile) do
-		desc "Optional Path to file with process ID"
+		desc "Optional Path to file with process ID, mutually exclusive with command."
 	end
 
 	newproperty(:sigtype) do
-		desc "Optional signal type for process. Numeric or symbolic"
+		desc "Optional signal type for process. Numeric or symbolic. Mutually exclusive with command."
+	end
+
+	newproperty(:command) do
+		desc "Optional command to restart a service. Mutually exclusive with with pidfile and sigtype"
 	end
 end
