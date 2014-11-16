@@ -34,7 +34,11 @@ Puppet::Type.newtype(:newsyslog) do
 	end
 
 	newproperty(:flags) do
-		desc "Newsyslog rotation flags. See newsyslog docs for meaning"
+		desc "Optional newsyslog rotation flags. See newsyslog docs for meaning"
+	end
+
+	newproperty(:monitor) do
+		desc "Optional username or email address that should receive notification messages if this is a monitored log file. Only valid, and required, in combination with the M flag."
 	end
 
 	newproperty(:pidfile) do

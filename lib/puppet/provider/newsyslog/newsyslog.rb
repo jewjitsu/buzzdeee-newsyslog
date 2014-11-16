@@ -15,12 +15,11 @@ Puppet::Type.type(:newsyslog).provide(
 	text_line :comment, :match => /^#/;
 	text_line :blank, :match => /^\s*$/;
  
-		# :match  => %r{^\s*(/[a-zA-Z0-9/_-]*)\s+(\w*:\w*)\s+(\d\d\d)\s+(\d+)\s+(\d+|\*)\s+(\*|\d+|\$\w+)\s+([[:upper:]]+)\s+(.*)},
 	record_line :parsed,
 		# TODO: usergroup parsing
 		:fields => %w{name usergroup mode keep size when flags remainder},
-		:match  => %r{^\s*(\S+)\s+(\w*:\w*|)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s*(.*)},
-		:optional => %w{usergroup remainder},
+		:match  => %r{^\s*(/\S+)\s+(\w*:\w*|)\s+(\d\d\d)\s+(\d+)\s+(\d+|\*)\s+(\S+)\s+([BFMZ]*)\s*(.*)},
+		:optional => %w{usergroup flags remainder},
 		:post_parse => proc { |hash|
 			if hash[:usergroup] == :absent
 				# no user/group
