@@ -1,6 +1,6 @@
 {
   "name": "buzzdeee-newsyslog",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "buzzdeee",
   "summary": "A Puppet module to manage log rotation via newsyslog",
   "license": "Apache-2.0",
@@ -9,9 +9,13 @@
   "issues_url": "https://github.com/buzzdeee/buzzdeee-newsyslog/issues",
   "operatingsystem_support": [
     {
+      "operatingsystem": "FreeBSD"
+    },
+    {
       "operatingsystem": "OpenBSD",
       "operatingsystemrelease": [
-        "5.6"
+        "5.6",
+        "5.7",
       ]
     }
   ],
@@ -19,6 +23,7 @@
   ],
   "tags": [
     "OpenBSD",
+    "FreeBSD",
     "logrotation"
   ]
 }
