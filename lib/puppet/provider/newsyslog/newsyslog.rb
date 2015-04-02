@@ -15,10 +15,15 @@ Puppet::Type.type(:newsyslog).provide(
 	text_line :comment, :match => /^#/;
 	text_line :blank, :match => /^\s*$/;
  
+	newsyslog_flags = case Facter.value(:operatingsystem)
+	when 'FreeBSD' then 'BCDGJNRUXZ'
+	when 'OpenBSD' then 'BFMZ'
+	end
+
 	record_line :parsed,
 		# TODO: usergroup parsing
 		:fields => %w{name usergroup mode keep size when flags remainder},
-		:match  => %r{^\s*(/\S+)\s+(\w*:\w*|)\s+(\d\d\d)\s+(\d+)\s+(\d+|\*)\s+(\S+)\s*([BFMZ]*)\s*(.*)},
+		:match  => %r{^\s*(/\S+)\s+(\w*:\w*|)\s+(\d\d\d)\s+(\d+)\s+(\d+|\*)\s+(\S+)\s*([#{newsyslog_flags}]*)\s*(.*)},
 		:optional => %w{usergroup flags remainder},
 		:post_parse => proc { |hash|
 			if hash[:usergroup] == :absent
